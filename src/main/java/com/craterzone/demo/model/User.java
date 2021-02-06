@@ -1,35 +1,49 @@
 package com.craterzone.demo.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class User {
 
-	
-	
-	private  String first_name;
-	private String last_name;
-	private int DOB;
-	private String Email;
-	private  String Address;
+@Id
+	private int userid;
+@Column
+	private  String firstname;
+@Column
+	private String lastname;
+@Column	
+private int DOB;
+@Column	
+
+private String Email;
+@Column
+private  String Address;
+@Column
 	private  int created;
+@Column
 	private  int updated;
-	private  String Email_password;
+@Column
+	private  String Emailpassword;
 	
-	public User(String first_name, String last_name, int dOB, String email, String address, int created, int updated,
-			String email_password) {
-		super();
-		this.first_name = first_name;
-		this.last_name = last_name;
-		DOB = dOB;
-		Email = email;
-		Address = address;
-		this.created = created;
-		this.updated = updated;
-		Email_password = email_password;
+
+
+	public int getUserid() {
+		return userid;
 	}
-	public String getFirst_name() {
-		return first_name;
+
+	public void setUser_id(int userid) {
+		this.userid = userid;
 	}
-	public String getLast_name() {
-		return last_name;
+
+	public String getFirstname() {
+		return firstname;
+	}
+	public String getLastname() {
+		return lastname;
 	}
 	public int getDOB() {
 		return DOB;
@@ -46,14 +60,14 @@ public class User {
 	public int getUpdated() {
 		return updated;
 	}
-	public String getEmail_password() {
-		return Email_password;
+	public String getEmailpassword() {
+		return Emailpassword;
 	}
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+	public void setLast_name(String lastname) {
+		this.lastname = lastname;
 	}
 	public void setDOB(int dOB) {
 		DOB = dOB;
@@ -70,15 +84,9 @@ public class User {
 	public void setUpdated(int updated) {
 		this.updated = updated;
 	}
-	public void setEmail_password(String email_password) {
-		Email_password = email_password;
+	public void setEmailpassword(String emailpassword) {
+		Emailpassword = emailpassword;
 	}
-	@Override
-	public String toString() {
-		return "User [first_name=" + first_name + ", last_name=" + last_name + ", DOB=" + DOB + ", Email=" + Email
-				+ ", Address=" + Address + ", created=" + created + ", updated=" + updated + ", Email_password="
-				+ Email_password + "]";
-	}	
-	
+
 
 }
