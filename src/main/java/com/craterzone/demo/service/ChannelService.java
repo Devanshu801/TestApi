@@ -21,7 +21,7 @@ public class ChannelService {
 		channelRepositry.findAll().forEach(channel1->channel.add(channel1));
 		return channel;
 	}
-
+	
 	public Channel getChannelById(int id)
 	{
 	 return channelRepositry.findById(id).get();
@@ -38,6 +38,4 @@ public class ChannelService {
 	{
 		channelRepositry.save(channel);
 	}
-	
-	
 }

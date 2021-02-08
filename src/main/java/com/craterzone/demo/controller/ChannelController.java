@@ -18,10 +18,8 @@ import com.craterzone.demo.service.ChannelService;
 @RestController
 public class ChannelController {
 
-	
-	
 	@Autowired
-	ChannelService channelservice;
+private ChannelService channelservice;
 
 	
 	@GetMapping("/channel")

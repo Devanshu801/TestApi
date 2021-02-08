@@ -35,8 +35,8 @@ private  String Address;
 		return userid;
 	}
 
-	public void setUser_id(int userid) {
-		this.userid = userid;
+	public int setUser_id(int userid) {
+		 return this.userid = userid;
 	}
 
 	public String getFirstname() {

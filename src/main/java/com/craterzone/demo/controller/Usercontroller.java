@@ -1,55 +1,69 @@
 package com.craterzone.demo.controller;
 
-import java.util.List;
+
+
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.craterzone.demo.model.User;
 import com.craterzone.demo.service.UserService;
 
 @RestController
+@RequestMapping("/api/v1/users")
 public class Usercontroller {
 
+	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
-	@GetMapping("/user")
-	private List<User> getAllUser()
+	@GetMapping("")
+	private  ResponseEntity<User> getAllUser(int userid)
 	{
-		return userService.getallusers();
 		
-	}
-
-	@GetMapping("/user/{userid}")
-	private User getUser(@PathVariable("userid") int userid)
-		{
-			return userService.getUserById(userid);
+		Optional<User> users = userService.getallusers(userid);
+		
+		if(users.isPresent()) {
+			return ResponseEntity.status(HttpStatus.OK).body(users.get());
 		}
-	@DeleteMapping("/user/{userid}")
-	private void deleteUser(@PathVariable("userid") int userid)
-	{
-	userService.delete(userid);
+		return ResponseEntity.badRequest().build();	
 	}
 	
-	@PostMapping("/user")
-	private int saveUser(@RequestBody User user)
-	{
-		userService.saveOrUpdate(user);
-		return user.getUserid();
-	}
+	@GetMapping("{userid}")
+	private ResponseEntity<User> getUser(@PathVariable("userid") int userid)
+		{
+			return new ResponseEntity<User>(userService.getUserById(userid),HttpStatus.OK);
 	
-	@PutMapping("/user")
-	private User update(@RequestBody User user)
-	{
+		}
+	@DeleteMapping("{userid}")
+	private ResponseEntity<User> deleteUser(@PathVariable("userid") int userid)
+		{
+	
+	return new ResponseEntity<User>(HttpStatus.OK);
+		}
+	@PutMapping("{userid}")
+	private ResponseEntity<User>  update(@PathVariable("userid") @RequestBody User user)
+		{
 		userService.saveOrUpdate(user);
-		return user;
-	}
+		return new ResponseEntity<User>(userService.saveOrUpdate(user),HttpStatus.OK);
+		}
+	@PostMapping("")
+	private ResponseEntity<User> saveuser(@RequestBody User user)
+		{
+	userService.saveOrUpdate(user);
+	return new ResponseEntity<User>(userService.saveOrUpdate(user),HttpStatus.CREATED);	
+		}
 }
+
+
+
+

@@ -24,7 +24,7 @@ public class VideoService {
 		return video;
 	}
 
-	public Video getVieoById(int id)
+	public Video getVideoById(int id)
 	{
 	 return videoRepositry.findById(id).get();
 	}

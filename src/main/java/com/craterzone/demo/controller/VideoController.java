@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.craterzone.demo.model.Video;
-
 import com.craterzone.demo.service.VideoService;
 
 @RestController
@@ -22,8 +20,6 @@ public class VideoController {
 	@Autowired
 	VideoService videoservice;
 	
-	
-
 	@GetMapping("/video")
 	private List<Video> getAllvideo()
 	{
@@ -34,7 +30,8 @@ public class VideoController {
 	@GetMapping("/video/{videoid}")
 	private Video getVideo(@PathVariable("videoid") int videoid)
 		{
-			return videoservice.getVieoById(videoid);
+			return videoservice.getVideoById(videoid);
+			
 		}
 	@DeleteMapping("/video/{videoid}")
 	private void deletevideo(@PathVariable("videoid") int videoid)

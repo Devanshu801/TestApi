@@ -89,8 +89,4 @@ public class Video {
 	public void setNumberofcreateddate(int numberofcreateddate) {
 		this.numberofcreateddate = numberofcreateddate;
 	}
-	
-	
-	
-	
 }

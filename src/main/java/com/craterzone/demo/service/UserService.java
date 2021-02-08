@@ -1,7 +1,6 @@
 package com.craterzone.demo.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,28 +15,27 @@ public class UserService {
 	@Autowired
 	UserRepositry userRepositry;
 	
-	
-	public List<User> getallusers()
+	public Optional<User> getallusers(int userid)
 	{
-		List<User> user = new ArrayList<User>();
-		userRepositry.findAll().forEach(user1->user.add(user1));
-		return user;
+		Optional<User> get = userRepositry.findByUserid(userid);
+		return get;
 	}
-
 	public User getUserById(int id)
 	{
 	 return userRepositry.findById(id).get();
 	}
-	public void saveOrUpdate(User user)
+	public User saveOrUpdate(User user)
 	{
-	userRepositry.save(user);
+	return userRepositry.save(user);
 	}
 	
-	public void delete(int id) {
-		userRepositry.deleteById(id);
+	public boolean delete(int id) {
+		return userRepositry.existsById(id);
 	}
-	public void update(User user,int userid)
+	public User update(User user,int userid)
 	{
-		userRepositry.save(user);
+		return userRepositry.save(user);
 	}
+
+	
 }
