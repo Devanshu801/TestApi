@@ -22,25 +22,21 @@ public class UserService {
 		Optional<User> userid = userRepositry.findById(id);
 			if(userid.isPresent()) {
 				return userRepositry.findById(id);
-		}
-			return Optional.empty();
-		
+	}
+		return Optional.empty();
 	}
 	
 	
 	public User registerUser(User user){
-		//check if exists
-		
-		return userRepositry.save(user);
+		return userRepositry.save(user);	
 	}
 	
-	public boolean delete(int id) {
-		return userRepositry.existsById(id);
+	public boolean delete(int userid) {
+		return userRepositry.existsById(userid);
 	}
 	
 	
 	public User updateUser(User user){
-		//check if user exists
 		return userRepositry.save(user);
 	}
 

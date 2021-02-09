@@ -4,21 +4,28 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+
 
 @Entity
 @Table
 public class User {
 
 @Id
-	private int userid;
+	private int id;
 @Column
+@NotBlank
+@Size(min=3,max=30)
 	private  String firstname;
 @Column
 	private String lastname;
 @Column	
 private int DOB;
-@Column	
 
+@Column(unique = true)
+@javax.validation.constraints.Email
 private String Email;
 @Column
 private  String Address;
@@ -32,11 +39,11 @@ private  String Address;
 
 
 	public int getUserid() {
-		return userid;
+		return id;
 	}
 
 	public void setUser_id(int userid) {
-		 this.userid = userid;
+		 this.id = userid;
 	}
 
 	public String getFirstname() {
@@ -87,6 +94,4 @@ private  String Address;
 	public void setEmailpassword(String emailpassword) {
 		Emailpassword = emailpassword;
 	}
-
-
 }
