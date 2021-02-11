@@ -1,7 +1,8 @@
 package com.craterzone.demo.controller;
 
 
-import java.util.List;
+
+import java.util.Objects;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.craterzone.demo.model.User;
 import com.craterzone.demo.service.UserService;
 
@@ -26,27 +28,28 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping
-	private  ResponseEntity<List<User>> getAllUser(){
-		List<User> users = userService.getAllUsers();	
+	/* @GetMapping
+	private  ResponseEntity<List<UserDao>> getAllUser(){
+		List<UserDao> users = userService.getAllUsers();	
 		return CollectionUtils.isEmpty(users) ?  ResponseEntity.noContent().build() :  ResponseEntity.status(HttpStatus.OK).body(users);
 	}
-	
-	@GetMapping("{id}")
-	private ResponseEntity<User>getUser(@PathVariable("id") int userId){
+	*/
+	@GetMapping("{userid}")
+	private ResponseEntity<User>getUser(@PathVariable("userid") User userId){
 		Optional<User> user = userService.getUserById(userId);
 		if(user.isPresent()) {
 			return new ResponseEntity<User>(HttpStatus.OK);
 		}
 			return new ResponseEntity <User>(HttpStatus.BAD_REQUEST);
-	}
-	@DeleteMapping("{id}")
-	private ResponseEntity<User> deleteUser(@PathVariable("id") int userid){
+	 }
+	 
+	@DeleteMapping("{userid}")
+	private ResponseEntity<User> deleteUser(@PathVariable("userid") int userid){
 		return new ResponseEntity<User>(HttpStatus.OK);
 	}
 	
-	@PutMapping("{id}")
-	private ResponseEntity<User> updateUser(@PathVariable("id") @RequestBody User user){
+	@PutMapping("{userid}")
+	private ResponseEntity<User> updateUser(@PathVariable("userid") @RequestBody User user){
 		userService.updateUser(user);
 		if(user != null) {
 			return new ResponseEntity<User>(userService.updateUser(user),HttpStatus.OK);
@@ -57,8 +60,8 @@ public class UserController {
 	@PostMapping("")
 	private ResponseEntity<User> registerUser(@RequestBody User user){
 		userService.registerUser(user);
-		if(user != null) {
-			return new ResponseEntity<User>(userService.registerUser(user),HttpStatus.CREATED);	
+		if(!Objects.isNull(user)) {
+			return new ResponseEntity(userService.registerUser(user),HttpStatus.CREATED);	
 		}
 		return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
 	}

@@ -1,16 +1,17 @@
 package com.craterzone.demo.model;
 
+
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import org.springframework.lang.NonNull;
 
 
 
-@Entity
-@Table
+
+
+
 public class User {
 
 @Id
@@ -18,80 +19,92 @@ public class User {
 @Column
 @NotBlank
 @Size(min=3,max=30)
-	private  String firstname;
+	private  String first_name;
 @Column
-	private String lastname;
+	private String last_name;
 @Column	
-private int DOB;
+private long date_of_birth;
 
-@Column(unique = true)
-@javax.validation.constraints.Email
-private String Email;
+
+private String email;
+
+ private  Address address;
 @Column
-private  String Address;
+	private  long created;
 @Column
-	private  int created;
+	private  long updated;
 @Column
-	private  int updated;
-@Column
-	private  String Emailpassword;
-	
+@NonNull
+	private  String emailpassword;
 
+public User( @NotBlank @Size(min = 3, max = 30) String first_name, String last_name, long date_of_birth,
+		String email, Address address, long created, long updated, String emailpassword) {
+	super();
+	this.first_name = first_name;
+	this.last_name = last_name;
+	this.date_of_birth = date_of_birth;
+	this.email = email;
+	this.address = address;
+	this.created = created;
+	this.updated = updated;
+	this.emailpassword = emailpassword;
+}
+public User() {
+	// TODO Auto-generated constructor stub
+}
+public int getId() {
+	return id;
+}
+public void setId(int id) {
+	this.id = id;
+}
+public String getFirst_name() {
+	return first_name;
+}
+public void setFirst_name(String first_name) {
+	this.first_name = first_name;
+}
+public String getLast_name() {
+	return last_name;
+}
+public void setLast_name(String last_name) {
+	this.last_name = last_name;
+}
+public long getDate_of_birth() {
+	return date_of_birth;
+}
+public void setDate_of_birth(long date_of_birth) {
+	this.date_of_birth = date_of_birth;
+}
+public String getEmail() {
+	return email;
+}
+public void setEmail(String email) {
+	this.email = email;
+}
+ public Address getAddress() {
+	return address;
+ }
+public void setAddress(Address address) {
+	this.address = address;
+}
 
-	public int getUserid() {
-		return id;
-	}
-
-	public void setUser_id(int userid) {
-		 this.id = userid;
-	}
-
-	public String getFirstname() {
-		return firstname;
-	}
-	public String getLastname() {
-		return lastname;
-	}
-	public int getDOB() {
-		return DOB;
-	}
-	public String getEmail() {
-		return Email;
-	}
-	public String getAddress() {
-		return Address;
-	}
-	public int getCreated() {
-		return created;
-	}
-	public int getUpdated() {
-		return updated;
-	}
-	public String getEmailpassword() {
-		return Emailpassword;
-	}
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-	public void setLast_name(String lastname) {
-		this.lastname = lastname;
-	}
-	public void setDOB(int dOB) {
-		DOB = dOB;
-	}
-	public void setEmail(String email) {
-		Email = email;
-	}
-	public void setAddress(String address) {
-		Address = address;
-	}
-	public void setCreated(int created) {
-		this.created = created;
-	}
-	public void setUpdated(int updated) {
-		this.updated = updated;
-	}
-	public void setEmailpassword(String emailpassword) {
-		Emailpassword = emailpassword;
-	}
+public long getCreated() {
+	return created;
+}
+public void setCreated(long created) {
+	this.created = created;
+}
+public long getUpdated() {
+	return updated;
+}
+public void setUpdated(long updated) {
+	this.updated = updated;
+}
+public String getEmailpassword() {
+	return emailpassword;
+}
+public void setEmailpassword(String emailpassword) {
+	this.emailpassword = emailpassword;
+}	
 }

@@ -1,112 +1,156 @@
 package com.craterzone.demo.dao;
 
+import java.util.Optional;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapKeyTemporal;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.craterzone.demo.model.Address;
+import com.craterzone.demo.model.User;
+
+
+
 
 @Entity
-@Table(name = "users")
+@Table(name="users")
 public class UserDao {
-	
-	@Id
-	private int id;
-	
-	@Column(name = "first_name")
-	private  String firstName;
-	
-	@Column(name = "last_name")
-	private String lastName;
-	
-	@Column	(name = "date_of_birth")
-	private int dateOfBirth;
-	
-	@Column	(name = "email")
-	private String email;
-	
-	@Column
-	private  String address;
-	
-	@Column
+
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+	private  int id;
+@Column
+@Size(min=3,max=30)
+	private   String firstName;
+@Column
+	private String last_name;
+@Column	
+@MapKeyTemporal(TemporalType.DATE)
+@DateTimeFormat(pattern = "dd/MM/yyyy")
+private long date_of_birth;
+
+@Column(unique = true)
+@javax.validation.constraints.Email
+private  String email;
+
+@OneToOne(cascade = CascadeType.ALL)
+@JoinColumn(name = "id", referencedColumnName = "id")
+  private  AddressDao address;
+@Column
 	private  long created;
-	
-	@Column
+@Column
 	private  long updated;
-	
-	@Column
-	private  String password;
+@Column
+	private  String emailpassword;
 
-	public int getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+public UserDao() {
+	super();
+}
 
-	public String getFirstName() {
-		return firstName;
-	}
+public UserDao(int id, @NotBlank @Size(min = 3, max = 30) String first_name, String last_name, long date_of_birth,
+		@Email String email, AddressDao address, long created, long updated, String emailpassword) {
+	super();
+	this.id = id;
+	this.firstName = first_name;
+	this.last_name = last_name;
+	this.date_of_birth = date_of_birth;
+	this.email = email;
+	 this.address = address;
+	this.created = created;
+	this.updated = updated;
+	this.emailpassword = emailpassword;
+}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
 
-	public String getLastName() {
-		return lastName;
-	}
+ public int getId() {
+	return id;
+}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+public void setId(int id) {
+	this.id = id;
+}
 
-	public int getDateOfBirth() {
-		return dateOfBirth;
-	}
+public String getFirstName() {
+	return firstName;
+}
 
-	public void setDateOfBirth(int dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
+}
 
-	public String getEmail() {
-		return email;
-	}
+public String getLast_name() {
+	return last_name;
+}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+public void setLast_name(String last_name) {
+	this.last_name = last_name;
+}
 
-	public String getAddress() {
-		return address;
-	}
+public long getDate_of_birth() {
+	return date_of_birth;
+}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+public void setDate_of_birth(long date_of_birth) {
+	this.date_of_birth = date_of_birth;
+}
 
-	public long getCreated() {
-		return created;
-	}
+public String getEmail() {
+	return email;
+}
 
-	public void setCreated(long created) {
-		this.created = created;
-	}
+public void setEmail(String email) {
+	this.email = email;
+}
 
-	public long getUpdated() {
-		return updated;
-	}
+public AddressDao getAddress() {
+	return address;
+}
 
-	public void setUpdated(long updated) {
-		this.updated = updated;
-	}
+public void setAddress(AddressDao address) {
+	this.address = address;
+}
 
-	public String getPassword() {
-		return password;
-	}
+public long getCreated() {
+	return created;
+}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	
+public void setCreated(long created) {
+	this.created = created;
+}
+
+public long getUpdated() {
+	return updated;
+}
+
+public void setUpdated(long updated) {
+	this.updated = updated;
+}
+
+public String getEmailpassword() {
+	return emailpassword;
+}
+
+public void setEmailpassword(String emailpassword) {
+	this.emailpassword = emailpassword;
+}
+
+public String toString() {
+	return "UserDao [id=" + id + ", first_name=" + firstName + ", last_name=" + last_name + ", date_of_birth="
+			+ date_of_birth + ", email=" + email + ", address=" + address + ", created=" + created + ", updated="
+			+ updated + ", emailpassword=" + emailpassword + "]";
+}
+		
 }

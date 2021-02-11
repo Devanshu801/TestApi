@@ -2,11 +2,18 @@ package com.craterzone.demo.repositry;
 
 
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.Optional;
 
-import com.craterzone.demo.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.craterzone.demo.dao.UserDao;
 
-public interface UserRepositry extends CrudRepository<User,Integer>{
 
 
+public interface UserRepositry extends JpaRepository<UserDao,Integer>{
+
+	Optional<UserDao> findByEmail(String name);
+
+	
+	 Optional<UserDao> findByfirstName(String name);
+	
 }
