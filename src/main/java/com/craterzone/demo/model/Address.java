@@ -20,7 +20,9 @@ private long created;
 private long updated;
 private User userid;
 
-
+public Address() {
+	super();
+}
 
 public Address(int id, int house_no, String street, String area, String landmark, String city, String state,
 		String country_code, String pincode, long created, long updated, User userid) {

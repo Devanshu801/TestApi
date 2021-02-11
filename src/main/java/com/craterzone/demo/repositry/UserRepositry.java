@@ -12,8 +12,6 @@ import com.craterzone.demo.dao.UserDao;
 public interface UserRepositry extends JpaRepository<UserDao,Integer>{
 
 	Optional<UserDao> findByEmail(String name);
-
-	
 	 Optional<UserDao> findByfirstName(String name);
 	
 }

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.craterzone.demo.model.User;
 import com.craterzone.demo.service.UserService;
 
@@ -25,6 +24,7 @@ import com.craterzone.demo.service.UserService;
 @RequestMapping("/api/v1/users")
 public class UserController {
 
+	
 	@Autowired
 	private UserService userService;
 	
@@ -45,8 +45,13 @@ public class UserController {
 	 
 	@DeleteMapping("{userid}")
 	private ResponseEntity<User> deleteUser(@PathVariable("userid") int userid){
+		userService.delete(userid);
+		if(!Objects.isNull(userid)) {
 		return new ResponseEntity<User>(HttpStatus.OK);
 	}
+		return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+	}
+	
 	
 	@PutMapping("{userid}")
 	private ResponseEntity<User> updateUser(@PathVariable("userid") @RequestBody User user){

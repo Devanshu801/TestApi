@@ -4,11 +4,8 @@ package com.craterzone.demo.dao;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.craterzone.demo.model.User;
 
 
 
@@ -40,6 +37,10 @@ private long updated;
 
 @OneToOne(mappedBy = "address")
  private UserDao user;
+
+public AddressDao() {
+	super();
+}
 public AddressDao(int id, int house_no, String street, String area, String landmark, String city, String state,
 		String country_code, String pincode, long created, long updated) {
 	super();

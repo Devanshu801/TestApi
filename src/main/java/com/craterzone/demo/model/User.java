@@ -8,10 +8,6 @@ import javax.validation.constraints.Size;
 import org.springframework.lang.NonNull;
 
 
-
-
-
-
 public class User {
 
 @Id
@@ -19,7 +15,7 @@ public class User {
 @Column
 @NotBlank
 @Size(min=3,max=30)
-	private  String first_name;
+	private  String firstName;
 @Column
 	private String last_name;
 @Column	
@@ -40,7 +36,7 @@ private String email;
 public User( @NotBlank @Size(min = 3, max = 30) String first_name, String last_name, long date_of_birth,
 		String email, Address address, long created, long updated, String emailpassword) {
 	super();
-	this.first_name = first_name;
+	this.firstName = first_name;
 	this.last_name = last_name;
 	this.date_of_birth = date_of_birth;
 	this.email = email;
@@ -59,10 +55,10 @@ public void setId(int id) {
 	this.id = id;
 }
 public String getFirst_name() {
-	return first_name;
+	return firstName;
 }
 public void setFirst_name(String first_name) {
-	this.first_name = first_name;
+	this.firstName = first_name;
 }
 public String getLast_name() {
 	return last_name;

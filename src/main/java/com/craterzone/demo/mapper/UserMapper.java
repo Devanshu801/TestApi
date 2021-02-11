@@ -2,7 +2,7 @@ package com.craterzone.demo.mapper;
 
 
 
-import org.apache.commons.beanutils.PropertyUtils;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 
@@ -21,11 +21,20 @@ ModelMapper modelmappper = new ModelMapper();
 		return  user;
 	}
 	
+	public static AddressDao AddressToAddressDao(User user) {
+		AddressDao addressDao = new AddressDao();
+		BeanUtils.copyProperties(user, addressDao);
+		return addressDao;	
+	}
+	public static Address AddressDaoToAddress(UserDao userdao) {
+		Address address = new Address();
+		BeanUtils.copyProperties(userdao, address);
+		return address;
+		
+	}
 		public static UserDao UserToUserDao(User user) {
 			UserDao userdao = new UserDao();
-	BeanUtils.copyProperties(user, userdao);
-		  
+	BeanUtils.copyProperties(user, userdao); 
 		return  userdao;
-	
 		}
 }
